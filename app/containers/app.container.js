@@ -16,6 +16,7 @@ class AppContainer extends React.Component {
         super(props);
         this.clientId = '2f98992c40b8edf17423d93bda2e04ab';
         this.state = {
+            playlist : 216762485,
             track: {stream_url: '', title: '', artwork_url: ''},
             tracks: [],
             trackPos : 0,
@@ -38,7 +39,7 @@ class AppContainer extends React.Component {
         let _self = this;
         
         //Request for a playlist via Soundcloud using a client id
-        Axios.get("https://api.soundcloud.com/playlists/254290779?client_id="+this.clientId)
+        Axios.get("https://api.soundcloud.com/playlists/"+this.state.playlist+"?client_id="+this.clientId)
             .then(function (response) {
                 const trackLength = response.data.tracks.length;
                 const randomNumber = Math.floor((Math.random() * trackLength) + 1);
@@ -120,19 +121,30 @@ class AppContainer extends React.Component {
     }
     
     togglePrevious(){
-        this.setState({
-            playStatus: Sound.status.PAUSED,
-            track: this.state.tracks[this.state.trackPos-1],  
-            trackPos : this.state.trackPos-1
-        });
+        try{
+            this.setState({
+                playStatus: Sound.status.PAUSED,
+                track: this.state.tracks[this.state.trackPos <= 0 ? this.state.tracks.length : this.state.trackPos-1],  
+                trackPos : this.state.trackPos <= 0 ? this.state.tracks.length : this.state.trackPos-1
+            });
+        }catch(err){
+            console.log(err);
+            this.setState({playStatus: Sound.status.PAUSED});
+        }
+        
     }
     
     toggleNext(){
-        this.setState({
-            playStatus: Sound.status.PAUSED,
-            track: this.state.tracks[this.state.trackPos > this.state.tracks.length? 0 : this.state.trackPos+1],  
-            trackPos : this.state.trackPos+1
-        });
+        try{
+            this.setState({
+                playStatus: Sound.status.PAUSED,
+                track: this.state.tracks[this.state.trackPos >= this.state.tracks.length? 0 : this.state.trackPos+1],  
+                trackPos : this.state.trackPos >= this.state.tracks.length? 0 : this.state.trackPos+1
+            });
+        }catch(err){
+            console.log(err);
+            this.setState({playStatus: Sound.status.PAUSED});
+        }
     }
     
     formatMilliseconds(milliseconds) {

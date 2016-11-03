@@ -42,6 +42,11 @@
 .musicplayer .trackdetails h3{
     color : whitesmoke;
     font-size : medium;
+    max-height: 2.2em;
+    text-overflow: ellipsis; 
+    /* display: block; */
+    /* word-wrap: break-word; */
+    overflow: hidden;
 }
 
     .musicplayer #player{
@@ -74,6 +79,10 @@
     display: flex;
     justify-content: space-between;
 }
+.musicplayer .progress .progresstime span{
+    font-size: small;
+}
+
 
 .musicBackground{
     background-size: 230%;
