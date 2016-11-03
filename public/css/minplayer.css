@@ -1,9 +1,10 @@
 * {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  list-style: none;
-  -webkit-backface-visibility: hidden;
+    max-height: 400px;  
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    list-style: none;
+    -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
     color:whitesmoke;
     font-family: 'Roboto', sans-serif;
