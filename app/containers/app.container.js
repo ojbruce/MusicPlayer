@@ -16,7 +16,7 @@ class AppContainer extends React.Component {
         super(props);
         this.clientId = '2f98992c40b8edf17423d93bda2e04ab';
         this.state = {
-            playlist : 216762485,
+            playlist : 198983484,
             track: {stream_url: '', title: '', artwork_url: ''},
             tracks: [],
             trackPos : 0,
@@ -176,8 +176,9 @@ class AppContainer extends React.Component {
                     <Header
                         />
                     <TrackDetails 
-                        title={this.state.track.title} 
-                        trackimg={this.xlArtwork(this.state.track.artwork_url)}
+                        title       ={this.state.track.title} 
+                        trackimg    ={this.xlArtwork(this.state.track.artwork_url)}
+                        playStatus  ={this.state.playStatus}
                         />
                     <ProgressBar 
                         position={this.state.position} 

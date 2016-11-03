@@ -10,10 +10,23 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.app #play:checked ~ .album {
-    -webkit-animation: album-in 0.15s reverse forwards, album-spin 3s 0.15s ease-in, album-spin 1.8s 3.15s infinite linear;
-    animation: album-in 0.15s reverse forwards, album-spin 3s 0.15s ease-in, album-spin 1.8s 3.15s infinite linear;
+.playing {
+    position: relative;
+    border-radius: 100%;
+    animation: rounded 2s reverse forwards, spin 3s cubic-bezier(0.4, 0, 1, 1), spin 4s infinite linear;
+    
 }
+
+
+@keyframes bounce{
+     from {top: 0;}
+     50%  {top: 0.5em;}
+     to   {top: 0;}
+}
+
+@keyframes rounded { 100% { border-radius: 0; } }
+
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .musicplayer {
     width : 25vw;
