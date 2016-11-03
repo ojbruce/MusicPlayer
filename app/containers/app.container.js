@@ -7,7 +7,7 @@ import Axios from 'axios';
 import TrackDetails from '../components/trackdetails.component';
 import Player from '../components/player.component';
 import ProgressBar from '../components/progressbar.component';
-
+import Header from '../components/header.component';
 
 // The app class
 class AppContainer extends React.Component {
@@ -18,6 +18,7 @@ class AppContainer extends React.Component {
         this.state = {
             track: {stream_url: '', title: '', artwork_url: ''},
             tracks: [],
+            trackPos : 0,
             playStatus: Sound.status.STOPPED,
             elapsed: '00:00',
             total: '00:00',
@@ -42,8 +43,7 @@ class AppContainer extends React.Component {
                 const trackLength = response.data.tracks.length;
                 const randomNumber = Math.floor((Math.random() * trackLength) + 1);
             
-                _self.setState({track: response.data.tracks[randomNumber]});
-                console.log(response.data.tracks[randomNumber]);
+                _self.setState({track: response.data.tracks[randomNumber],  trackPos : randomNumber, tracks :response.data.tracks});
             })
             .catch(function (err) {
                 // If something goes wrong, let us know
@@ -60,7 +60,9 @@ class AppContainer extends React.Component {
         // Update input box
         this.setState({autoCompleteValue: event.target.value});
         let _this = this;
-
+        Console.log("");
+        Console.log("Handle Change");
+        Console.log("");
         //Search for song with entered value
         Axios.get("https://api.soundcloud.com/tracks?client_id="+this.clientId+"&q="+value)
           .then(function (response) {
@@ -77,9 +79,9 @@ class AppContainer extends React.Component {
      * Change player state when a song is playing
      */
     handleSongPlaying(audio){
-         this.setState({  elapsed:  this.formatMilliseconds(audio.position),
-                          total:    this.formatMilliseconds(audio.duration),
-                          position: audio.position / audio.duration })
+         this.setState({elapsed:  this.formatMilliseconds(audio.position),
+                        total:    this.formatMilliseconds(audio.duration),
+                        position: audio.position / audio.duration });
     }
     
     /*
@@ -97,6 +99,10 @@ class AppContainer extends React.Component {
     addClientToUrl(url) {
         return url+"?client_id="+this.clientId;
     }
+    
+    xlArtwork(url){
+        return url.replace(/large/, 't500x500');
+    }
 
 
     /*
@@ -112,7 +118,22 @@ class AppContainer extends React.Component {
           this.setState({playStatus: Sound.status.PLAYING})
         }
     }
-
+    
+    togglePrevious(){
+        this.setState({
+            playStatus: Sound.status.PAUSED,
+            track: this.state.tracks[this.state.trackPos-1],  
+            trackPos : this.state.trackPos-1
+        });
+    }
+    
+    toggleNext(){
+        this.setState({
+            playStatus: Sound.status.PAUSED,
+            track: this.state.tracks[this.state.trackPos+1],  
+            trackPos : this.state.trackPos+1
+        });
+    }
     
     formatMilliseconds(milliseconds) {
         // Format hours
@@ -134,28 +155,34 @@ class AppContainer extends React.Component {
     
     render() {
         return (
-            <div className="musicplayer">
-                
-                <TrackDetails 
-                    title={this.state.track.title} 
-                    trackimg={this.state.track.artwork_url}
-                    />
-                <ProgressBar 
-                    position={this.state.position} 
-                    elapsed={this.state.elapsed}
-                    total={this.state.total}
-                    />
-                <Player 
-                    togglePlay={this.togglePlay.bind(this)}
-                    playStatus={this.state.playStatus}
-                    />
-                <Sound
-                    url={this.addClientToUrl(this.state.track.stream_url)}
-                    playStatus={this.state.playStatus}
-                    onPlaying={this.handleSongPlaying.bind(this)}
-                    playFromPosition={this.state.playFromPosition}
-                    onFinishedPlaying={this.handleSongFinished.bind(this)}
-                    />
+            <div>
+                <div className="musicBackground"></div>
+                <div className="musicplayer">
+                    <Header
+                        />
+                    <TrackDetails 
+                        title={this.state.track.title} 
+                        trackimg={this.xlArtwork(this.state.track.artwork_url)}
+                        />
+                    <ProgressBar 
+                        position={this.state.position} 
+                        elapsed={this.state.elapsed}
+                        total={this.state.total}
+                        />
+                    <Player 
+                        togglePlay  ={this.togglePlay.bind(this)}
+                        playStatus  ={this.state.playStatus}
+                        previous    ={this.togglePrevious.bind(this)}
+                        next        ={this.toggleNext.bind(this)}
+                        />
+                    <Sound
+                        url={this.addClientToUrl(this.state.track.stream_url)}
+                        playStatus={this.state.playStatus}
+                        onPlaying={this.handleSongPlaying.bind(this)}
+                        playFromPosition={this.state.playFromPosition}
+                        onFinishedPlaying={this.handleSongFinished.bind(this)}
+                        />
+                </div>
             </div>
         );
     }

@@ -9,15 +9,15 @@ class Player extends React.Component {
     
     render() {
         const playPauseClass = ClassNames({
-            'fa fa-play-circle-o': this.props.playStatus == 'PLAYING' ? false : true,
-            'fa fa-pause-circle-o': this.props.playStatus == 'PLAYING' ? true : false
+            'fa fa-play-circle-o fa-2x': this.props.playStatus == 'PLAYING' ? false : true,
+            'fa fa-pause-circle-o fa-2x': this.props.playStatus == 'PLAYING' ? true : false
         });
 
         return(
-            <div className="player">
+            <div id="player" className="player">
                 <div className="player__backward">
-                    <button >
-                        <i className="fa fa-step-backward"></i>
+                    <button onClick={this.props.previous}>
+                        <i className="fa fa-step-backward fa-2x"></i>
                     </button>
                 </div>
                 
@@ -26,8 +26,8 @@ class Player extends React.Component {
                 </div>
                 
                 <div className="player__forward">
-                    <button >
-                        <i className="fa fa-step-forward"></i>
+                    <button onClick={this.props.next}>
+                        <i className="fa fa-step-forward fa-2x"></i>
                     </button>
                 </div>
             </div>
