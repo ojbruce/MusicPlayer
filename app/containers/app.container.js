@@ -130,7 +130,7 @@ class AppContainer extends React.Component {
     toggleNext(){
         this.setState({
             playStatus: Sound.status.PAUSED,
-            track: this.state.tracks[this.state.trackPos+1],  
+            track: this.state.tracks[this.state.trackPos > this.state.tracks.length? 0 : this.state.trackPos+1],  
             trackPos : this.state.trackPos+1
         });
     }
@@ -154,9 +154,12 @@ class AppContainer extends React.Component {
     }
     
     render() {
+        const backStyle = {
+             backgroundImage: 'url('+this.xlArtwork(this.state.track.artwork_url)+')'
+        }
         return (
             <div>
-                <div className="musicBackground"></div>
+                <div className="musicBackground" style={backStyle}></div>
                 <div className="musicplayer">
                     <Header
                         />

@@ -11,11 +11,14 @@ class ProgressBar extends React.Component {
 
     return(
       <div className="progress">
-        <span className="player__time-elapsed">{this.props.elapsed}</span>
+        
         <progress
            value={this.props.position}
            max="1"></progress>
-         <span className="player__time-total">{this.props.total}</span>
+         <div className="progresstime">
+            <span className="player__time-elapsed">{this.props.elapsed}</span>
+            <span className="player__time-total">{this.props.total}</span>
+        </div>
       </div>
     )
   }

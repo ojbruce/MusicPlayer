@@ -15,9 +15,15 @@ class Player extends React.Component {
 
         return(
             <div id="player" className="player">
+                <div className="player__repeat">
+                    <button onClick={this.props.next}>
+                        <i className="fa fa-repeat"></i>
+                    </button>
+                </div>
+            
                 <div className="player__backward">
                     <button onClick={this.props.previous}>
-                        <i className="fa fa-step-backward fa-2x"></i>
+                        <i className="fa fa-step-backward"></i>
                     </button>
                 </div>
                 
@@ -27,7 +33,13 @@ class Player extends React.Component {
                 
                 <div className="player__forward">
                     <button onClick={this.props.next}>
-                        <i className="fa fa-step-forward fa-2x"></i>
+                        <i className="fa fa-step-forward"></i>
+                    </button>
+                </div>
+            
+                <div className="player__random">
+                    <button onClick={this.props.next}>
+                        <i className="fa fa-random"></i>
                     </button>
                 </div>
             </div>
