@@ -5,8 +5,7 @@ class TrackDetails extends React.Component {
   render(){
     return(
       <div className="trackdetails">
-        <img src={this.props.trackimg}/>
-        <h4>{this.props.album}>{this.props.artist}</h4>
+        <img src={this.props.trackimg} width="150px" height="150px"/>
         <h3>{this.props.title}</h3>
       </div>
     )

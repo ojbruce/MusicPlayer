@@ -6,6 +6,9 @@ import Autocomplete from 'react-autocomplete';
 // Create Search component class
 class Search extends React.Component{
 
+constructor(props) {
+super(props);
+}
   render() {
     // Return JSX via render()
     return (

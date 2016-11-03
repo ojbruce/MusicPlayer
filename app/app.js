@@ -2,33 +2,23 @@
   * Created by Olivia Bruce  
   */}
 
+//React libraries
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Import all sub components
-import Search from './components/search.component';
-import TrackDetails from './components/trackdetails.component';
-import Player from './components/player.component';
-import ProgressBar from './components/progressbar.component';
-
-// The app class
+//Import Container component
+import AppContainer from './containers/app.container'
+    
 class App extends React.Component {
-    // render method is most important
-    // render method returns JSX template
-    render() {
+    render () {
         return (
-            <div>
-                <Search />
-                <TrackDetails title={'Track title'} album={'The album'} artist={'The artist'} trackimg={'https://i.redd.it/50jeybcxvztx.jpg'}/>
-                <ProgressBar position={'0.3'} elapsed="'00:00'" total={'0:40'}/>
-                <Player />
-            </div>
+            <AppContainer />
         );
     }
 }
 
-// Render to ID content in the DOM
+// Render to index.html
 ReactDOM.render(
-    <App/ >,
+    <App />,
     document.getElementById('content')
 );
