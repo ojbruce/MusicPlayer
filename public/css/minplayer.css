@@ -140,7 +140,7 @@ body{
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 
-@media(min-width: 800px){
+@media(min-width: 1200px){
     .musicplayer, .musicBackground{
         width : 30vw;
         max-width: 500px;
