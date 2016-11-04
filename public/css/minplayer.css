@@ -13,10 +13,13 @@
 .playing {
     position: relative;
     border-radius: 100%;
-    animation: rounded 2s reverse forwards, spin 3s cubic-bezier(0.4, 0, 1, 1), spin 4s infinite linear;
+    animation: unrounded 2s reverse forwards, spin 3s cubic-bezier(0.4, 0, 1, 1), spin 4s infinite linear;
     
 }
 
+.notplaying{
+    animation: rounded 0.15s reverse;
+}
 
 @keyframes bounce{
      from {top: 0;}
@@ -24,7 +27,8 @@
      to   {top: 0;}
 }
 
-@keyframes rounded { 100% { border-radius: 0; } }
+@keyframes rounded { 100% { border-radius: 100%; } }
+@keyframes unrounded { 100% { border-radius: 0; } }
 
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 

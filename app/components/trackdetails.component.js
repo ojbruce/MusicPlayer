@@ -7,7 +7,8 @@ class TrackDetails extends React.Component {
     // Render
     render(){
         const playingClass = ClassNames({
-            'playing': this.props.playStatus == 'PLAYING' ? true : false
+            'playing': this.props.playStatus == 'PLAYING' ? true : false,
+            'notplaying': this.props.playStatus == 'PLAYING' ? false : true
         });
         return(
           <div className="trackdetails">
