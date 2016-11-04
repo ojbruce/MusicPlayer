@@ -21,7 +21,6 @@
 }
 
 body{
-    background-color: aliceblue;
     box-sizing: border-box;
 }
 
@@ -72,7 +71,7 @@ body{
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: large;
             outline:0;
         }
 
@@ -89,7 +88,7 @@ body{
     justify-content: space-between;
 }
 .musicplayer .progress .progresstime span{
-    font-size: small;
+    font-size: medium;
 }
 
 
@@ -144,5 +143,6 @@ body{
     .musicplayer, .musicBackground{
         width : 30vw;
         max-width: 500px;
+        max-height: 500px;
     }
 }
