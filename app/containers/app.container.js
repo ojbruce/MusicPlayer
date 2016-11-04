@@ -50,6 +50,7 @@ class AppContainer extends React.Component {
                 // If something goes wrong, let us know
                 console.log("Load Track Error");
                 console.log(err);
+                randomTrack();
             });
     }
 
@@ -129,7 +130,7 @@ class AppContainer extends React.Component {
             });
         }catch(err){
             console.log(err);
-            this.setState({playStatus: Sound.status.PAUSED});
+            togglePrevious();
         }
         
     }
@@ -144,6 +145,7 @@ class AppContainer extends React.Component {
         }catch(err){
             console.log(err);
             this.setState({playStatus: Sound.status.PAUSED});
+             toggleNext();
         }
     }
     
